@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2d4a3e;
+            --accent: #e8a87c;
+            --text: #e8e8e8;
+            --text-dim: #a0a0a0;
+            --bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(45, 74, 62, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(232, 168, 124, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 3px solid var(--accent);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(232, 168, 124, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--accent);
+        }
+
+        .avatar:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 12px 48px rgba(232, 168, 124, 0.3);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 400;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--card-bg);
+            padding: 3rem;
+            margin: 3rem 0;
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .about p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        .resume-link {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--secondary);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+
+        .resume-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(232, 168, 124, 0.3);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            margin: 4rem 0;
+        }
+
+        .portfolio-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--text);
+            font-weight: 700;
+            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .project-grid {
+            display: grid;
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.4s; }
+        .project-card:nth-child(2) { animation-delay: 0.5s; }
+        .project-card:nth-child(3) { animation-delay: 0.6s; }
+        .project-card:nth-child(4) { animation-delay: 0.7s; }
+        .project-card:nth-child(5) { animation-delay: 0.8s; }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(232, 168, 124, 0.2);
+            border-color: var(--accent);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 4rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .project-tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: var(--secondary);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        footer {
+            margin: 6rem 0 3rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.9s backwards;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .footer-text {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .about {
+                padding: 2rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="avatar">
+                <img src="images/PedroFerreira_FT.jpg" alt="Pedro Ferreira">
+            </div>
+            <h1>Pedro Ferreira</h1>
+            <p class="tagline">Game Developer</p>
+        </header>
+
+        <!-- About Section -->
+        <section class="about">
+            <h2>About Me</h2>
+            <p>
+                I am a game developer with experience in C++/OpenGL, Python, as well in game engines like Unity and Unreal Engine. Over the years, I've worked on 
+                various projects ranging from 2D games in Unity to building a game engine from scratch. I also built a custom MIDI parser that can be used in rythm games.
+            </p>
+            <p>
+                In my intership at Fujitsu I gained experience in collaborating with cross-functional teams, optimization, 
+                and maintaining clean, well-documented code.
+            </p>
+            <a href="Pedro_Ferreira_CV.pdf" class="resume-link" target="_blank">View Resume →</a>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section">
+            <h2>Featured Projects</h2>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/Engine_1.png" alt="Project 1">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">2D Game Engine</h3>
+                        <p class="project-tech">C++ OpenGL SDL</p>
+                        <p class="project-description">
+                        A lightweight 2D game engine built from scratch in C++ for learning and rapid prototyping.<br>
+                        This engine focuses on simplicity and performance while providing essential 2D game development features.   
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/PedroFerreiraDevv/2d_game_engine" class="project-link" target="_blank">GitHub →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/FP_1.png" alt="Project 2">
+                        
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Freedom's Path</h3>
+                        <p class="project-tech">Unity</p>
+                        <p class="project-description">
+                         Freedom's Path is a Stealth game happening in a war scenario, available for Windows.<br>
+                         You play as a girl that amidst an attack on her city gets separated from her parents and has to find safety.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/PedroFerreiraDevv/Freedom-s-Path" class="project-link" target="_blank">Github →</a>
+                            <a href="https://dinkdonkstudios.itch.io/freedoms-path" class="project-link" target="_blank">Itch.io →</a> 
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/Dart_1.png" alt="Project 3">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Flame Engine 2D Prototype</h3>
+                        <p class="project-tech">Flame Engine, Dart</p>
+                        <p class="project-description">
+                            Small project made in Flame, used to learn and to test the capabilities of Flame engine.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/PedroFerreiraDevv/flame-challenge-xennon" class="project-link" target="_blank">Github →</a>
+                            <a href="https://PedroFerreiraDevv.github.io/flame-challenge-xennon/" class="project-link" target="_blank">Play Game →</a> 
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 4 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/CG_1.png" alt="Project 4">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">3D Object Loader/Renderer</h3>
+                        <p class="project-tech">C++, OpenGL</p>
+                        <p class="project-description">
+                            A 3D model loader and renderer using C++ and OpenGL.<br>
+                            I chose to use CS 1.6 assets due to being a game that I played a lot when I was younger.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/PedroFerreiraDevv/OpenGL-FPS-Scene-CS-1.6" class="project-link" target="_blank">Github →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 5 -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="images/MIDI_1.png" alt="Project 5">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">MIDI Parser for Rythm Games</h3>
+                        <p class="project-tech">Python</p>
+                        <p class="project-description">
+                            Developed for a rythm game. It parses MIDI files to a CSV file in a format thats easily used in most conventional game engines.
+                        </p>
+                        <div class="project-links">
+                            <a href="https://github.com/PedroFerreiraDevv/MIDI-Parser" class="project-link" target="_blank">Github →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/PedroFerreiraDevv" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/pedro-ferreira-4272702bb/" target="_blank">LinkedIn</a>
+                <a href="mailto:pedro.m.ferreira.work@gmail.com">Email</a>
+            </div>
+            <p class="footer-text">Thanks for visiting! ✨</p>
